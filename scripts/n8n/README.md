@@ -37,6 +37,10 @@ chmod +x *.sh
 ```bash
 az vm open-port --resource-group <resource-group-name> --name <vm-name> --port 3389
 ```
+    - Create an Allow rule for port 5678 TCP to access n8n.
+```bash
+az vm open-port --resource-group <resource-group-name> --name <vm-name> --port 5678
+```
     - You can delete the SSH rule if you want to restrict access to Remote Desktop only.
 
 9. After this you can use Remote Desktop to connect to the VM and access n8n at `http://localhost:5678`.
