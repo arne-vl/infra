@@ -12,28 +12,6 @@
 #
 ################################################################
 
-# Update and install dependencies
-sudo apt update && sudo apt upgrade -y
-
-# Add Docker's official GPG key:
-sudo apt update
-sudo apt install -y ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-# Add the repository to Apt sources:
-echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-    $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-
-echo "Installing Docker..."
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-echo "Docker installed successfully."
-
 # Setup n8n using Docker
 mkdir -p ~/n8n
 
@@ -47,7 +25,7 @@ mkdir files
 sudo chown -R 1000:1000 ./data
 sudo chown -R 1000:1000 ./files
 
-if [[ "$(sudo docker compose up -d)" -eq 0 ]]; then
+if [[ "$(docker compose up -d)" -eq 0 ]]; then
     echo
     echo "n8n is now running. You can access it at http://localhost:5678"
 else
